@@ -6,15 +6,9 @@ var __publicField = (obj, key, value) => {
   return value;
 };
 Object.defineProperties(exports, { __esModule: { value: true }, [Symbol.toStringTag]: { value: "Module" } });
+const classes = require("../assets/fc8c8fe6.js");
+const getChildrenArray = require("../assets/9ae40455.js");
 const index = "";
-const generateId = (length) => {
-  let id = "";
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (let index2 = 0; index2 < length; index2 += 1) {
-    id += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return id;
-};
 const INSTANCE_ID_LENGTH = 4;
 const PARAMS_KEY = "_accordion";
 const PARAMS = {
@@ -47,6 +41,7 @@ const DEFAULTS = {
 const _Accordions = class {
   constructor(customParameters = {}) {
     __publicField(this, "updateInstanceId", () => {
+      console.log(classes.CLASSES);
       this.instanceId = _Accordions.generateInstanceId();
     });
     __publicField(this, "generateAccordionId", (accordionId) => `accordion-${this.instanceId}-${accordionId}`);
@@ -169,6 +164,9 @@ const _Accordions = class {
       }
     });
     __publicField(this, "init", () => {
+      const array = getChildrenArray.getChildrenArray(this.parentElement);
+      console.log(array);
+      console.log(classes.KEYS);
       this.updateInstanceId();
       this.initAccordions();
       this.isDestroyed = false;
@@ -250,7 +248,7 @@ const _Accordions = class {
 };
 let Accordions = _Accordions;
 __publicField(Accordions, "generateInstanceId", () => {
-  const instanceId = generateId(INSTANCE_ID_LENGTH);
+  const instanceId = getChildrenArray.getRandomId(INSTANCE_ID_LENGTH);
   return _Accordions.isInstanceIdUnique(instanceId) ? instanceId : _Accordions.generateInstanceId();
 });
 __publicField(Accordions, "isInstanceIdUnique", (instanceId) => !document.querySelector(`[id^="accordion-${instanceId}]"`));

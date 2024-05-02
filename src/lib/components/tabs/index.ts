@@ -1,7 +1,10 @@
-import { CLASSES, KEYS } from '../../../constants';
+import { CLASSES } from '../../constants/classes';
+import { KEYS } from '../../constants/keys';
+import { getRandomId } from '../../utils/get-random-id';
+import { getChildrenArray } from '../../utils/get-children-array';
 import { CUSTOM_CLASSES } from './custom-classes';
-import { getChildrenArray, getRandomId } from '../../utils';
-import './index.scss';
+
+import './tabs.scss';
 import {
 	AutoPlayModel, EventDetailsModel, EventsModel, OrientationType, TabsConfigModel, TriggerEvents,
 } from './interfaces';
@@ -187,10 +190,10 @@ export class Tabs {
 	};
 
 	private runAutoPlay = () => {
-		this.#autoplayTimeout = setTimeout(() => {
+		this.#autoplayTimeout = Number(setTimeout(() => {
 			this.goTo(this.nextIndex as number, false);
 			this.runAutoPlay();
-		}, this.#autoplay.delay);
+		}, this.#autoplay.delay));
 	};
 
 	private addListenersForTabs = () => {

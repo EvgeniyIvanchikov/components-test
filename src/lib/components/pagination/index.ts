@@ -1,7 +1,8 @@
-import { CLASSES } from '../../../constants/classes';
+import { CLASSES } from '../../constants/classes';
+import { KEYS } from '../../constants/keys';
 import { CUSTOM_CLASSES } from './custom-classes';
 
-import './index.scss';
+import './pagination.scss';
 
 import {
 	PaginationConfigModel, addButtonsPropertiesModel, hiddenButtonsConfigModel, pageMapItemModel,
@@ -63,6 +64,7 @@ export class Pagination {
 	}
 
 	init = () => {
+		console.log(KEYS);
 		const queryPage = this.url.searchParams.get('page');
 		this.currentPage = queryPage ? +queryPage : 1;
 		this.paginationWrapper = this.component.querySelector(this.paginationWrapperSelector) as HTMLElement

@@ -4,6 +4,7 @@ import path from 'node:path';
 
 import { fileURLToPath } from 'node:url';
 import typescript from '@rollup/plugin-typescript';
+import copy from 'rollup-plugin-copy';
 
 // const entries = {
 // 	// Tabs: fileURLToPath(new URL('src/lib/', import.meta.url)),
@@ -42,7 +43,6 @@ const entries = findEntries('./src/lib/components');
 console.log(findEntries('./src/lib/components'));
 
 export default defineConfig({
-
 	plugins: [
 		typescript({}),
 	],
@@ -61,10 +61,16 @@ export default defineConfig({
 			// input: entries,
 			output: {
 				entryFileNames: '[name]/index.js',
-				chunkFileNames: '[name]/[hash].js',
-				assetFileNames: '[name]/[hash].[ext]',
+				chunkFileNames: 'assets/[hash].js',
+				assetFileNames: 'assets/[hash].[ext]',
 			},
-
+			plugins: [
+				copy({
+					targets: [
+						{ src: './src/dist', dest: './' },
+					],
+				}),
+			],
 		},
 	},
 	server: {

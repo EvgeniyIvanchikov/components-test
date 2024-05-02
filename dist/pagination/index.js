@@ -6,14 +6,14 @@ var __publicField = (obj, key, value) => {
   return value;
 };
 Object.defineProperties(exports, { __esModule: { value: true }, [Symbol.toStringTag]: { value: "Module" } });
-const classes = require("../classes/89954d31.js");
+const classes = require("../assets/fc8c8fe6.js");
 const PREFIX = "js--";
 const CUSTOM_CLASSES = {
   BUTTON: `${PREFIX}pagination-button`,
   CURRENT: `${PREFIX}pagination-current`,
   EMPTY_PLACE: `${PREFIX}pagination-empty-place`
 };
-const index = "";
+const pagination = "";
 class Pagination {
   constructor(component = '[data-pagination="wrapper"]', { paginationWrapperSelector = '[data-pagination="container"]', dynamicElementSelector = '.w-dyn-item[role="listitem"]', previousButtonInner = "Prev", nextButtonInner = "Next", itemsPerPage, hiddenButtons = {
     min: 6
@@ -38,6 +38,7 @@ class Pagination {
     __publicField(this, "hiddenButtons");
     __publicField(this, "init", () => {
       var _a;
+      console.log(classes.KEYS);
       const queryPage = this.url.searchParams.get("page");
       this.currentPage = queryPage ? +queryPage : 1;
       this.paginationWrapper = (_a = this.component.querySelector(this.paginationWrapperSelector)) != null ? _a : void 0;
@@ -55,19 +56,19 @@ class Pagination {
     });
     __publicField(this, "createButtonsMap", () => {
       const result = [];
-      const pages = new Array(this.totalPages).fill("").map((_element, index2) => index2 + 1);
+      const pages = new Array(this.totalPages).fill("").map((_element, index) => index + 1);
       const isButtonVisible = (value) => value === 1 || value === this.totalPages || value >= this.currentPage - 1 && value <= this.currentPage + 1;
-      pages.forEach((element, index2) => {
+      pages.forEach((element, index) => {
         const mapItem = {
           page: element,
-          current: index2 + 1 === this.currentPage
+          current: index + 1 === this.currentPage
         };
         if (isButtonVisible(element) || this.buttons.length < this.hiddenButtons.min) {
           result.push({
             ...mapItem,
             visible: true
           });
-        } else if (isButtonVisible(pages[index2 + 1]) && isButtonVisible(pages[index2 - 1])) {
+        } else if (isButtonVisible(pages[index + 1]) && isButtonVisible(pages[index - 1])) {
           result.push({
             ...mapItem,
             visible: true
@@ -131,9 +132,9 @@ class Pagination {
       } else {
         this.makeEnable(this.nextButton);
       }
-      this.buttons.forEach((button, index2) => {
-        const buttonMapItem = this.buttonsMap[index2];
-        if (index2 + 1 === this.currentPage) {
+      this.buttons.forEach((button, index) => {
+        const buttonMapItem = this.buttonsMap[index];
+        if (index + 1 === this.currentPage) {
           button.classList.add(CUSTOM_CLASSES.CURRENT);
         } else {
           button.classList.remove(CUSTOM_CLASSES.CURRENT);
@@ -176,8 +177,8 @@ class Pagination {
       this.initVariables();
     });
     __publicField(this, "goToCurrent", () => {
-      this.dynamicElements.forEach((item, index2) => {
-        const isActive = Math.ceil((index2 + 1) / this.itemsPerPage) === this.currentPage;
+      this.dynamicElements.forEach((item, index) => {
+        const isActive = Math.ceil((index + 1) / this.itemsPerPage) === this.currentPage;
         if (isActive) {
           item.removeAttribute("style");
           item.removeAttribute("inert");
