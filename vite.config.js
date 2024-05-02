@@ -4,13 +4,7 @@ import path from 'node:path';
 
 import { fileURLToPath } from 'node:url';
 import typescript from '@rollup/plugin-typescript';
-import copy from 'rollup-plugin-copy';
 
-// const entries = {
-// 	// Tabs: fileURLToPath(new URL('src/lib/', import.meta.url)),
-// 	Tabs: fileURLToPath(new URL('src/lib/components/tabs/index.ts', import.meta.url)),
-// 	Accordions: fileURLToPath(new URL('src/lib/components/Accordions/index.js', import.meta.url)),
-// };
 
 function findEntries(startPath) {
 	const entries = {};
@@ -21,7 +15,6 @@ function findEntries(startPath) {
 		const stat = fs.lstatSync(directoryPath);
 
 		if (stat.isDirectory()) {
-			// Поиск файла index.js или index.ts
 			const possibleIndexFiles = ['index.js', 'index.ts'];
 			for (let index = 0; index < possibleIndexFiles.length; index += 1) {
 				const indexFile = possibleIndexFiles[index];
@@ -29,7 +22,7 @@ function findEntries(startPath) {
 				if (fs.existsSync(indexPath)) {
 					const componentName = path.basename(file);
 					entries[componentName] = fileURLToPath(new URL(indexPath, import.meta.url));
-					break; // Прерываем цикл, если нашли подходящий файл
+					break;
 				}
 			}
 		}
@@ -39,8 +32,6 @@ function findEntries(startPath) {
 }
 
 const entries = findEntries('./src/lib/components');
-
-console.log(findEntries('./src/lib/components'));
 
 export default defineConfig({
 	plugins: [
@@ -54,23 +45,25 @@ export default defineConfig({
 			entry: entries,
 			name: 'digitalbutlers-components',
 			fileName: 'digitalbutlers-components',
-			formats: ['es', 'cjs'], // Форматы сборки
+			formats: ['es', 'cjs'],
 		},
 		rollupOptions: {
-			// Указываем Rollup обрабатывать каждый компонент как отдельный входной файл
-			// input: entries,
 			output: {
 				entryFileNames: '[name]/index.js',
 				chunkFileNames: 'assets/[hash].js',
-				assetFileNames: 'assets/[hash].[ext]',
+				assetFileNames: (chunkInfo) => {
+					const arrayOfChunks = chunkInfo.name.split('/');
+					const currentFileExtension = arrayOfChunks[arrayOfChunks.length - 1].split('.')[1];
+
+					console.log(chunkInfo.name);
+
+					if (chunkInfo.name && chunkInfo.type === 'asset' && currentFileExtension === 'css') {
+						const currentComponentName = arrayOfChunks[arrayOfChunks.length - 2];
+						return `styles/${currentComponentName}.css`;
+					}
+					return 'assets/[hash].[ext]';
+				},
 			},
-			plugins: [
-				copy({
-					targets: [
-						{ src: './src/dist', dest: './' },
-					],
-				}),
-			],
 		},
 	},
 	server: {
