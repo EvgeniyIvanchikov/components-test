@@ -62,6 +62,7 @@ export default defineConfig({
 					}
 					return 'assets/[hash].[ext]';
 				},
+				treeshake: true,
 			},
 		},
 	},
