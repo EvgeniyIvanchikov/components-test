@@ -45,7 +45,7 @@ export default defineConfig({
 			entry: entries,
 			name: 'digitalbutlers-components',
 			fileName: 'digitalbutlers-components',
-			formats: ['es', 'cjs'],
+			formats: ['es'],
 		},
 		rollupOptions: {
 			output: {

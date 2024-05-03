@@ -1,13 +1,11 @@
-"use strict";
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-Object.defineProperties(exports, { __esModule: { value: true }, [Symbol.toStringTag]: { value: "Module" } });
-const classes = require("../assets/fc8c8fe6.js");
-const getChildrenArray = require("../assets/9ae40455.js");
+import { C as CLASSES, K as KEYS } from "../assets/50c00b01.js";
+import { g as getChildrenArray, a as getRandomId } from "../assets/1ea5e9f1.js";
 const index = "";
 const INSTANCE_ID_LENGTH = 4;
 const PARAMS_KEY = "_accordion";
@@ -41,7 +39,7 @@ const DEFAULTS = {
 const _Accordions = class {
   constructor(customParameters = {}) {
     __publicField(this, "updateInstanceId", () => {
-      console.log(classes.CLASSES);
+      console.log(CLASSES);
       this.instanceId = _Accordions.generateInstanceId();
     });
     __publicField(this, "generateAccordionId", (accordionId) => `accordion-${this.instanceId}-${accordionId}`);
@@ -164,9 +162,9 @@ const _Accordions = class {
       }
     });
     __publicField(this, "init", () => {
-      const array = getChildrenArray.getChildrenArray(this.parentElement);
+      const array = getChildrenArray(this.parentElement);
       console.log(array);
-      console.log(classes.KEYS);
+      console.log(KEYS);
       this.updateInstanceId();
       this.initAccordions();
       this.isDestroyed = false;
@@ -248,8 +246,10 @@ const _Accordions = class {
 };
 let Accordions = _Accordions;
 __publicField(Accordions, "generateInstanceId", () => {
-  const instanceId = getChildrenArray.getRandomId(INSTANCE_ID_LENGTH);
+  const instanceId = getRandomId(INSTANCE_ID_LENGTH);
   return _Accordions.isInstanceIdUnique(instanceId) ? instanceId : _Accordions.generateInstanceId();
 });
 __publicField(Accordions, "isInstanceIdUnique", (instanceId) => !document.querySelector(`[id^="accordion-${instanceId}]"`));
-exports.Accordions = Accordions;
+export {
+  Accordions
+};

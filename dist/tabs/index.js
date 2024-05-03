@@ -1,4 +1,3 @@
-"use strict";
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => {
@@ -24,9 +23,8 @@ var __privateSet = (obj, member, value, setter) => {
   return value;
 };
 var _tabpanelsListSelector, _tabbuttonsListSelector, _deletableTabs, _autoplay, _autoplayTimeout, _listenersAdded, _equalHeight, _destroyed, _inited, _defaultRoles, _defaultSelectors;
-Object.defineProperties(exports, { __esModule: { value: true }, [Symbol.toStringTag]: { value: "Module" } });
-const classes = require("../assets/fc8c8fe6.js");
-const getChildrenArray = require("../assets/9ae40455.js");
+import { K as KEYS, C as CLASSES } from "../assets/50c00b01.js";
+import { a as getRandomId, g as getChildrenArray } from "../assets/1ea5e9f1.js";
 const CUSTOM_CLASSES = {
   TAB: "js--tab",
   PANEL: "js--panel",
@@ -148,43 +146,43 @@ class Tabs {
         if (targetButton && targetIndex !== void 0 && this.tabs.includes(targetButton)) {
           this.stopAutoPlay();
           switch (key) {
-            case classes.KEYS.LEFT:
-            case classes.KEYS.RIGHT: {
+            case KEYS.LEFT:
+            case KEYS.RIGHT: {
               event.preventDefault();
               if (this.orientation === "horizontal") {
                 this.switchTabOnArrowPress(eventDetails);
               }
               break;
             }
-            case classes.KEYS.UP:
-            case classes.KEYS.DOWN: {
+            case KEYS.UP:
+            case KEYS.DOWN: {
               event.preventDefault();
               if (this.orientation === "vertical") {
                 this.switchTabOnArrowPress(eventDetails);
               }
               break;
             }
-            case classes.KEYS.DELETE: {
+            case KEYS.DELETE: {
               event.preventDefault();
               this.deleteTab(eventDetails);
               break;
             }
-            case classes.KEYS.ENTER: {
+            case KEYS.ENTER: {
               event.preventDefault();
               this.goTo(+targetIndex);
               break;
             }
-            case classes.KEYS.SPACE: {
+            case KEYS.SPACE: {
               event.preventDefault();
               targetButton.click();
               break;
             }
-            case classes.KEYS.END: {
+            case KEYS.END: {
               event.preventDefault();
               this.focusTab(this.lastIndex);
               break;
             }
-            case classes.KEYS.HOME: {
+            case KEYS.HOME: {
               event.preventDefault();
               this.focusTab(0);
               break;
@@ -196,8 +194,8 @@ class Tabs {
     __publicField(this, "setUnactiveAll", () => {
       this.setUnactiveAttributesAll();
       [this.tabs, this.panels].flat().forEach((element) => {
-        element.classList.remove(classes.CLASSES.ACTIVE);
-        element.classList.add(classes.CLASSES.UNACTIVE);
+        element.classList.remove(CLASSES.ACTIVE);
+        element.classList.add(CLASSES.UNACTIVE);
       });
     });
     __publicField(this, "setUnactiveAttributesAll", () => {
@@ -215,10 +213,10 @@ class Tabs {
       this.panels[index].removeAttribute("inert");
     });
     __publicField(this, "setActiveClasses", (index) => {
-      this.tabs[index].classList.remove(classes.CLASSES.UNACTIVE);
-      this.tabs[index].classList.add(classes.CLASSES.ACTIVE);
-      this.panels[index].classList.remove(classes.CLASSES.UNACTIVE);
-      this.panels[index].classList.add(classes.CLASSES.ACTIVE);
+      this.tabs[index].classList.remove(CLASSES.UNACTIVE);
+      this.tabs[index].classList.add(CLASSES.ACTIVE);
+      this.panels[index].classList.remove(CLASSES.UNACTIVE);
+      this.panels[index].classList.add(CLASSES.ACTIVE);
     });
     __publicField(this, "focusTab", (order) => {
       this.tabs[order].focus();
@@ -227,8 +225,8 @@ class Tabs {
       const { key, targetIndex, event } = eventDetails;
       event.preventDefault();
       switch (key) {
-        case classes.KEYS.LEFT:
-        case classes.KEYS.UP: {
+        case KEYS.LEFT:
+        case KEYS.UP: {
           if (targetIndex !== void 0) {
             const nextIndex = targetIndex - 1 < 0 ? Number(this.lastIndex) : targetIndex - 1;
             if (this.triggerEvent === TriggerEvents.mouseover) {
@@ -239,8 +237,8 @@ class Tabs {
           }
           break;
         }
-        case classes.KEYS.RIGHT:
-        case classes.KEYS.DOWN: {
+        case KEYS.RIGHT:
+        case KEYS.DOWN: {
           if (targetIndex !== void 0) {
             const nextIndex = targetIndex >= Number(this.lastIndex) ? 0 : targetIndex + 1;
             if (this.triggerEvent === TriggerEvents.mouseover) {
@@ -298,8 +296,8 @@ class Tabs {
       (_b = this.tabPanelsList) == null ? void 0 : _b.classList.remove(CUSTOM_CLASSES.PANEL_LIST);
       this.tabs.forEach((tab, index) => {
         tab.classList.remove(CUSTOM_CLASSES.TAB);
-        tab.classList.remove(classes.CLASSES.ACTIVE);
-        tab.classList.remove(classes.CLASSES.UNACTIVE);
+        tab.classList.remove(CLASSES.ACTIVE);
+        tab.classList.remove(CLASSES.UNACTIVE);
         tab.removeAttribute("tabindex");
         tab.removeAttribute("aria-label");
         tab.removeAttribute("aria-selected");
@@ -308,8 +306,8 @@ class Tabs {
         tab.removeAttribute("aria-controls");
         delete tab.dataset.deletable;
         this.panels[index].classList.remove(CUSTOM_CLASSES.PANEL);
-        this.panels[index].classList.remove(classes.CLASSES.ACTIVE);
-        this.panels[index].classList.remove(classes.CLASSES.UNACTIVE);
+        this.panels[index].classList.remove(CLASSES.ACTIVE);
+        this.panels[index].classList.remove(CLASSES.UNACTIVE);
         this.panels[index].removeAttribute("aria-labelledby");
         this.panels[index].removeAttribute("id");
         this.panels[index].removeAttribute("aria-label");
@@ -336,8 +334,8 @@ class Tabs {
       this.prevIndex = this.activeIndex - 1 < 0 ? this.lastIndex : this.activeIndex - 1;
     });
     __publicField(this, "update", () => {
-      this.tabs = getChildrenArray.getChildrenArray(this.tabButtonsList);
-      this.panels = getChildrenArray.getChildrenArray(this.tabPanelsList);
+      this.tabs = getChildrenArray(this.tabButtonsList);
+      this.panels = getChildrenArray(this.tabPanelsList);
       this.updateProperties();
       this.assignTabsAttributes();
     });
@@ -368,7 +366,7 @@ class Tabs {
     this.on = on;
     this.matchMediaRule = matchMediaRule;
     this.isInMatchMedia = false;
-    this.generatedId = getChildrenArray.getRandomId();
+    this.generatedId = getRandomId();
     __privateSet(this, _equalHeight, equalHeight);
     __privateSet(this, _defaultRoles, {
       tab: "tab",
@@ -392,8 +390,8 @@ class Tabs {
       this.tabButtonsList = this.tabsWrapper.querySelector(__privateGet(this, _tabbuttonsListSelector));
       this.tabPanelsList = this.tabsWrapper.querySelector(__privateGet(this, _tabpanelsListSelector));
       if (this.tabButtonsList && this.tabPanelsList) {
-        this.tabs = getChildrenArray.getChildrenArray(this.tabButtonsList);
-        this.panels = getChildrenArray.getChildrenArray(this.tabPanelsList);
+        this.tabs = getChildrenArray(this.tabButtonsList);
+        this.panels = getChildrenArray(this.tabPanelsList);
         if (this.tabs.length > 0 && this.tabs.length === this.panels.length) {
           if (__privateGet(this, _equalHeight)) {
             this.setEqualHeight();
@@ -428,4 +426,6 @@ _destroyed = new WeakMap();
 _inited = new WeakMap();
 _defaultRoles = new WeakMap();
 _defaultSelectors = new WeakMap();
-exports.Tabs = Tabs;
+export {
+  Tabs
+};

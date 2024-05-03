@@ -1,12 +1,10 @@
-"use strict";
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-Object.defineProperties(exports, { __esModule: { value: true }, [Symbol.toStringTag]: { value: "Module" } });
-const classes = require("../assets/fc8c8fe6.js");
+import { K as KEYS, C as CLASSES } from "../assets/50c00b01.js";
 const PREFIX = "js--";
 const CUSTOM_CLASSES = {
   BUTTON: `${PREFIX}pagination-button`,
@@ -38,7 +36,7 @@ class Pagination {
     __publicField(this, "hiddenButtons");
     __publicField(this, "init", () => {
       var _a;
-      console.log(classes.KEYS);
+      console.log(KEYS);
       const queryPage = this.url.searchParams.get("page");
       this.currentPage = queryPage ? +queryPage : 1;
       this.paginationWrapper = (_a = this.component.querySelector(this.paginationWrapperSelector)) != null ? _a : void 0;
@@ -84,7 +82,7 @@ class Pagination {
     });
     __publicField(this, "addCustomButtons", () => {
       if (this.totalPages > 1) {
-        this.paginationWrapper.classList.remove(classes.CLASSES.UNACTIVE);
+        this.paginationWrapper.classList.remove(CLASSES.UNACTIVE);
         this.addButton({
           label: "Prev page",
           content: this.previousButtonInner
@@ -100,7 +98,7 @@ class Pagination {
           content: this.nextButtonInner
         });
       } else {
-        this.paginationWrapper.classList.add(classes.CLASSES.UNACTIVE);
+        this.paginationWrapper.classList.add(CLASSES.UNACTIVE);
       }
       this.createButtonsMap();
       this.updateButtonsAttrs();
@@ -246,4 +244,6 @@ class Pagination {
     this.init();
   }
 }
-exports.Pagination = Pagination;
+export {
+  Pagination
+};
