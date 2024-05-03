@@ -2,8 +2,7 @@ import { CLASSES } from '../../constants/classes';
 import { KEYS } from '../../constants/keys';
 import { CUSTOM_CLASSES } from './custom-classes';
 
-// import './pagination.scss';
-import '../pagination.scss';
+import './pagination.scss';
 
 import {
 	PaginationConfigModel, addButtonsPropertiesModel, hiddenButtonsConfigModel, pageMapItemModel,

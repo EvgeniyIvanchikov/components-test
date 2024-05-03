@@ -55,11 +55,10 @@ export default defineConfig({
 					const arrayOfChunks = chunkInfo.name.split('/');
 					const currentFileExtension = arrayOfChunks[arrayOfChunks.length - 1].split('.')[1];
 
-					console.log(chunkInfo.name);
-
 					if (chunkInfo.name && chunkInfo.type === 'asset' && currentFileExtension === 'css') {
 						const currentComponentName = arrayOfChunks[arrayOfChunks.length - 2];
-						return `styles/${currentComponentName}.css`;
+						return `${currentComponentName}/index.css`;
+						// return `styles/${currentComponentName}.css`;
 					}
 					return 'assets/[hash].[ext]';
 				},
