@@ -58,11 +58,9 @@ export default defineConfig({
 					if (chunkInfo.name && chunkInfo.type === 'asset' && currentFileExtension === 'css') {
 						const currentComponentName = arrayOfChunks[arrayOfChunks.length - 2];
 						return `${currentComponentName}/index.css`;
-						// return `styles/${currentComponentName}.css`;
 					}
-					return 'assets/[hash].[ext]';
+					return 'assets/[name].[ext]';
 				},
-				treeshake: true,
 			},
 		},
 	},

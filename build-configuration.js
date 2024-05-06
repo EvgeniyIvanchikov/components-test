@@ -16,7 +16,7 @@ function generateExportsObjectAndIndexJS() {
 	exports['.'] = './dist/index.js';
 	components.forEach((componentName) => {
 		if (componentName === 'assets') return;
-		console.log('!!!!!!!!!!!', componentName);
+
 		const functionName = componentName[0].toUpperCase() + componentName.slice(1);
 		const jsFilePath = path.posix.join(componentName, 'index.js');
 
